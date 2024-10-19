@@ -1,0 +1,43 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science con Python e R",
+    "section": "",
+    "text": "Benvenuti\nQuesto sito è stato creato per supportare gli studenti del Corso di Laurea in Scienze e Tecniche Psicologiche dell’Università degli Studi di Firenze nel consolidamento dei concetti appresi nell’insegnamento di Psicometria (A.A. 2024/2025).\nIn questo sito è presente una raccolta completa di esercizi, corredati dalle rispettive soluzioni, che spaziano dall’analisi descrittiva ai modelli statistici più complessi, coprendo l’intera gamma di argomenti trattati durante le lezioni. Le dispense di riferimento sono accessibili mediante il seguente link.",
+    "crumbs": [
+      "Benvenuti"
+    ]
+  },
+  {
+    "objectID": "index.html#informazioni-sullinsegnamento",
+    "href": "index.html#informazioni-sullinsegnamento",
+    "title": "Data Science con Python e R",
+    "section": "Informazioni sull’insegnamento",
+    "text": "Informazioni sull’insegnamento\n\n\nCodice: B000286 - PSICOMETRIA \n\nModulo: B000286 - PSICOMETRIA (Cognomi L-Z) \n\nCorso di laurea: Scienze e Tecniche Psicologiche \n\nAnno Accademico: 2024-2025 \n\nCalendario: Il corso si terrà dal 3 marzo al 31 maggio 2025.\n\nOrario delle lezioni: Le lezioni si svolgeranno il lunedì e il martedì dalle 8:30 alle 10:30 e il giovedì dalle 11:30 alle 13:30.\n\nLuogo: Le lezioni si terranno presso il Plesso didattico La Torretta.\n\nModalità di svolgimento della didattica: Le lezioni ed esercitazioni saranno svolte in modalità frontale.",
+    "crumbs": [
+      "Benvenuti"
+    ]
+  },
+  {
+    "objectID": "prefazione.html",
+    "href": "prefazione.html",
+    "title": "Prefazione",
+    "section": "",
+    "text": "Questo repository fornisce esercizi pratici e soluzioni dettagliate per consolidare i concetti appresi nell’insegnamento di Psicometria. Attraverso esempi concreti, esploreremo metodi di analisi dati più robusti e replicabili, superando i limiti dell’approccio frequentista.",
+    "crumbs": [
+      "Prefazione"
+    ]
+  },
+  {
+    "objectID": "chapters/python/data_structures.html",
+    "href": "chapters/python/data_structures.html",
+    "title": "1  Chapter 2: Data Structures",
+    "section": "",
+    "text": "Esercizio 1.1 Supponiamo di dover formare una commissione di 5 psicologi su un gruppo di 20 persone (10 psicologi clinici e 10 psicologi del lavoro). Qual è la probabilità che almeno 2 psicologi clinici siano nella commissione? Risolvi il problema usando una simulazione Monte Carlo.\n\n\n👀 Visualizza la Soluzione\n\n\nSoluzione. Per calcolare questa probabilità in maniera analitica, utilizziamo la seguente uguaglianza:\n\\[\nP(\\text{almeno 2 psicologi clinici}) = 1 - P(\\text{nessun psicologo clinico}) - P(\\text{1 psicologo clinico}).\n\\]\nIl numero totale di modi per selezionare 5 persone dal gruppo di 20 è dato da:\n\\[\n\\binom{20}{5} = \\frac{20!}{5!(15!)} = 15,504.\n\\]\nIl numero di modi per avere nessun psicologo clinico nella commissione (ovvero, selezionare solo psicologi del lavoro) è:\n\\[\n\\binom{10}{0} \\times \\binom{10}{5} = 1 \\times 252 = 252.\n\\]\nQuindi, la probabilità di avere nessun psicologo clinico è:\n\\[\nP(\\text{nessun psicologo clinico}) = \\frac{252}{15,504} \\approx 0.016.\n\\]\nIl numero di modi per avere esattamente 1 psicologo clinico nella commissione è:\n\\[\n\\binom{10}{1} \\times \\binom{10}{4} = 10 \\times 210 = 2,100.\n\\]\nQuindi, la probabilità di avere esattamente 1 psicologo clinico è:\n\\[\nP(\\text{1 psicologo clinico}) = \\frac{2,100}{15,504} \\approx 0.135.\n\\]\nLa probabilità di avere almeno 2 psicologi clinici nella commissione è quindi:\n\\[\n\\begin{align}\nP(\\text{almeno 2 psicologi clinici}) &= 1 - P(\\text{nessun psicologo clinico}) - P(\\text{1 psicologo clinico}) \\notag\\\\\n&= 1 - 0.016 - 0.135 \\notag\\\\\n&= 0.848.\\notag\n\\end{align}\n\\]\nQuindi, la probabilità che almeno 2 psicologi clinici siano nella commissione è circa 0.848.\n\nimport numpy as np\nimport scipy.stats as stats\nimport math\n\n\n# Funzione per calcolare le combinazioni\ndef nCk(n, k):\n    return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))\n\n\n# Calcolo delle probabilità per il problema della commissione\ntotal_ways = nCk(20, 5)\nno_clinical = nCk(10, 0) * nCk(10, 5)\none_clinical = nCk(10, 1) * nCk(10, 4)\n\np_no_clinical = no_clinical / total_ways\np_one_clinical = one_clinical / total_ways\n\np_at_least_two_clinical = 1 - p_no_clinical - p_one_clinical\n\nprint(f\"Probabilità di almeno 2 psicologi clinici: {p_at_least_two_clinical:.3f}\")\n\nProbabilità di almeno 2 psicologi clinici: 0.848\n\n\nIn maniera più intuitiva, possiamo risolvere il problema con una simulazione Monte Carlo.\n\nimport random\n\n# Numero di simulazioni\nsimulations = 1000000\n\n# Numero di successi (almeno 2 psicologi clinici nella commissione)\nsuccess_count = 0\n\n# Creiamo una lista che rappresenta il gruppo di 20 persone\n# 1 rappresenta un psicologo clinico, 0 rappresenta un psicologo del lavoro\ngroup = [1] * 10 + [0] * 10\n\n# Simulazione Monte Carlo\nfor _ in range(simulations):\n    # Estrai casualmente 5 persone dal gruppo\n    committee = random.sample(group, 5)\n\n    # Conta quanti psicologi clinici ci sono nella commissione\n    num_clinical_psychologists = sum(committee)\n\n    # Verifica se ci sono almeno 2 psicologi clinici\n    if num_clinical_psychologists &gt;= 2:\n        success_count += 1\n\n# Calcola la probabilità\nprobability = success_count / simulations\n\n# Mostra il risultato\nprint(\n    f\"La probabilità che almeno 2 psicologi clinici siano nella commissione è: {probability:.4f}\"\n)\n\nLa probabilità che almeno 2 psicologi clinici siano nella commissione è: 0.8480\n\n\n\n\nEsercizio 1.2 Write a function that takes a list of numbers and returns a new list containing: 1. All even numbers from the original list 2. Sorted in descending order 3. With duplicates removed\nExample input: [1, 4, 2, 7, 8, 2, 3, 4, 9, 6]\n\n\n👀 Visualizza la Soluzione\n\n\nSoluzione. Here’s the solution with explanation:\n\ndef process_numbers(numbers):\n    # Convert to set to remove duplicates\n    # Filter for even numbers\n    # Sort in descending order\n    result = sorted(\n        {num for num in numbers if num % 2 == 0},\n        reverse=True\n    )\n    return result\n\n# Test the function\ntest_list = [1, 4, 2, 7, 8, 2, 3, 4, 9, 6]\nprint(f\"Original list: {test_list}\")\nprint(f\"Processed list: {process_numbers(test_list)}\")\n\nOriginal list: [1, 4, 2, 7, 8, 2, 3, 4, 9, 6]\nProcessed list: [8, 6, 4, 2]\n\n\nExplanation: - We use a set comprehension to simultaneously remove duplicates and filter even numbers - The sorted() function with reverse=True handles the descending order requirement - This solution has O(n log n) time complexity due to the sorting operation\n\n\nEsercizio 1.3 Create a function that takes a string of words and returns a dictionary where: - Keys are the words - Values are dictionaries containing: - ‘length’: length of the word - ‘vowels’: count of vowels in the word - ‘palindrome’: boolean indicating if the word is a palindrome\nExample input: “level python noon code”\n\n\n👀 Visualizza la Soluzione\n\n\nSoluzione. Here’s the solution with explanation:\n\ndef analyze_words(text):\n    def count_vowels(word):\n        return sum(1 for char in word.lower() if char in 'aeiou')\n    \n    def is_palindrome(word):\n        word = word.lower()\n        return word == word[::-1]\n    \n    words = text.split()\n    result = {}\n    \n    for word in words:\n        result[word] = {\n            'length': len(word),\n            'vowels': count_vowels(word),\n            'palindrome': is_palindrome(word)\n        }\n    \n    return result\n\n# Test the function\ntext = \"level python noon code\"\nanalysis = analyze_words(text)\nfor word, info in analysis.items():\n    print(f\"\\n{word}:\")\n    for key, value in info.items():\n        print(f\"  {key}: {value}\")\n\n\nlevel:\n  length: 5\n  vowels: 2\n  palindrome: True\n\npython:\n  length: 6\n  vowels: 1\n  palindrome: False\n\nnoon:\n  length: 4\n  vowels: 2\n  palindrome: True\n\ncode:\n  length: 4\n  vowels: 2\n  palindrome: False\n\n\nExplanation: - We define helper functions for vowel counting and palindrome checking - The main function creates a dictionary comprehension with nested dictionaries - Each word is analyzed only once, making it efficient for large inputs",
+    "crumbs": [
+      "Python",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Chapter 2: Data Structures</span>"
+    ]
+  }
+]
