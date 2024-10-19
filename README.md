@@ -6,20 +6,62 @@ https://ccaudek.github.io/psicometria-esercizi/
 
 Raccolta di esercizi e soluzioni per consolidare i concetti appresi durante l'insegnamento di Psicometria. Basato sulle dispense disponibili su <https://ccaudek.github.io/psicometria/>.
 
-## Istruzioni per l'utilizzo
 
-- **Visualizzazione locale:** Esegui
+## Sito Web Quarto: Guida alla Pubblicazione su GitHub Pages
 
-    ```bash
-    quarto preview --render all --no-browse
-    ```
+### Passo 1: Creare il Repository
 
-    per creare una versione locale del sito.
+Crea un repository su GitHub. Ricorda di aggiungere un file `README.md` e un file `.gitignore` durante la creazione.
 
-- **Aggiornamento su GitHub Pages:** Esegui
+### Passo 2: Clonare il Repository
 
-    ```bash
-    ghp-import -n -p -f docs
-    ```
+Clona il repository sul tuo computer locale usando il seguente comando:
 
-    per pubblicare gli aggiornamenti sul sito web.
+```bash
+git clone https://github.com/ccaudek/psicometria
+```
+
+### Passo 3: Aggiungere Contenuti e Visualizzare il Sito Localmente
+
+Aggiungi i contenuti desiderati nella cartella locale del repository. Per eseguire un'anteprima del sito in locale, utilizza questo comando:
+
+```bash
+quarto preview --render all --no-browse
+```
+
+### Passo 4: Eseguire il Backup su GitHub
+
+Dopo aver apportato le modifiche, esegui il backup del lavoro su GitHub con i seguenti comandi:
+
+```bash
+git add -A
+git commit -m "Descrizione del commit"
+git push
+```
+
+### Passo 5: Configurare GitHub Pages
+
+Vai nelle impostazioni del repository su GitHub. Nella sezione **Pages/Build and Deployment**, configura le seguenti opzioni:
+
+- `Select branch`: seleziona `gh-pages`
+- `Select folder`: seleziona `/(root)`
+
+Salva le impostazioni.
+
+### Passo 6: Pubblicare il Sito con `ghp-import`
+
+Dopo aver modificato le impostazioni di GitHub Pages, utilizza il comando `ghp-import` per evitare la creazione di un'ulteriore branch:
+
+```bash
+ghp-import -n -p -f docs
+```
+
+In questo modo, assicuri che il sito venga generato correttamente a partire dalla branch `gh-pages`.
+
+### Passo 7: Verificare la Pubblicazione
+
+Se tutto è stato eseguito correttamente, su GitHub Pages dovrebbe apparire il messaggio:
+
+```
+Your site is live at https://ccaudek.github.io/psicometria
+```

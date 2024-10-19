@@ -26,7 +26,15 @@ book:
 
     - part: "Python"
       chapters:
-        - chapters/python/data_structures.qmd
+        - chapters/python/01_python.qmd
+
+    - part: "EDA"
+      chapters:
+        - chapters/eda/01_eda.qmd
+
+    - part: "Probabilità"
+      chapters:
+        - chapters/probability/01_probability.qmd
 
 bibliography: ./references.bib
 
