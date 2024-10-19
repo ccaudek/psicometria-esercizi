@@ -1,0 +1,43 @@
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.solution-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const solution = button.nextElementSibling;
+                const isHidden = solution.style.display === 'none' || solution.style.display === '';
+                solution.style.display = isHidden ? 'block' : 'none';
+                button.innerHTML = isHidden ? '📖 Nascondi la Soluzione' : '👀 Visualizza la Soluzione';
+            });
+        });
+    });
+</script>
+
+<style>
+    .solution {
+        display: none;
+        margin: 1em 0;
+        padding: 1em;
+        border-left: 3px solid #1c9f6b;
+        background-color: #f8f9fa;
+    }
+
+    .solution-toggle {
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        color: #1c9f6b;
+        background: none;
+        border: 1px solid #1c9f6b;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .solution-toggle:hover {
+        background-color: #f0f0f0;
+    }
+
+    .exercise {
+        margin: 2em 0;
+        padding: 1em;
+        border-left: 3px solid #2780e3;
+        background-color: #f8f9fa;
+    }
+</style>

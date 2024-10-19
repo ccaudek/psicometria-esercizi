@@ -1,0 +1,3 @@
+# Prefazione {.unnumbered}
+
+Questo repository fornisce esercizi pratici e soluzioni dettagliate per consolidare i concetti appresi nell'insegnamento di [Psicometria](https://ccaudek.github.io/psicometria/). Attraverso esempi concreti, esploreremo metodi di analisi dati più robusti e replicabili, superando i limiti dell'approccio frequentista.
